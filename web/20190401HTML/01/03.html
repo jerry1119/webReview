@@ -1,0 +1,77 @@
+<form action="test.ashx" method="post">
+    <table border="1">
+        <tr>
+            <td>
+                <label for="username">用户名:</label>
+            </td>
+            <td>
+                <input type="text" id="username" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="pwd">密码:</label>
+            </td>
+            <td>
+                <input type="password" id="pwd" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="confirpwd">确认密码:</label>
+            </td>
+            <td>
+                <input type="password" id="confirpwd" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="province">选择省市：</label>
+            </td>
+            <td>
+                <select id="province">
+                    <option>重庆</option>
+                    <option>山东</option>
+                    <option>安徽</option>
+                    <option>四川</option>
+                    <option>广西</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>性别：</td>
+            <td>
+                <input type="radio" name="sex" value="1" />男
+                <input type="radio" name="sex" value="2" />女
+                <input type="radio" name="sex" value="3" />保密
+            </td>
+        </tr>
+        <tr>
+            <td>职业：</td>
+            <td>
+                <input type="radio" name="carrer" value="1" />学生
+                <input type="radio" name="carrer" value="2" />老师
+                <input type="radio" name="carrer" value="3" />其他
+            </td>
+        </tr>
+        <tr>
+
+            <td colspan="2">
+                <filedset>
+                    <legend>兴趣爱好</legend>
+                    <input type="checkbox" />吃饭
+                    <input type="checkbox" />睡觉
+                    <input type="checkbox" />打豆豆
+                </filedset>
+            </td>
+
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <input type="submit" value="注册" />
+                <input type="reset" value="重置" />
+            </td>
+        </tr>
+    </table>
+</form>
