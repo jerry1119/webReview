@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>  
+    #div1{
+        border: 1px solid red;
+        height: 300px;
+        width: 200px;
+        overflow: hidden;
+        
+    }
+    </style>
+    <script>
+        window.onload =function(){
+            document.getElementById('btn').onclick=function(){
+                var div = document.getElementById('div1');
+                if (this.value=='隐藏') {
+                    var timmer = setInterval(() => {
+                        var h = div.offsetHeight;   //获取元素高度直接是元素的offsetHeight属性，而设置则是 元素.style.height
+                        if(h>=50){
+                            div.style.height=h-50+'px';
+                        }
+                        else{
+                            this.value='显示';
+                            div.style.display='none';//display打错了。。。
+                            clearInterval(timmer);                           
+                        }
+                    }, 1000);
+                  
+                }
+                else{
+                    //设置值为空就会去找id选择器里面的属性，这样就恢复了默认
+                    div.style.display='';
+                    div.style.height='';
+                    this.value='隐藏';
+                }
+            };
+        };
+    </script>
+</head>
+<body>
+    <input type="button" id="btn" value="隐藏">
+    <div id="div1">
+        <h1>这个不错啊</h1>
+        <h2>这个不错啊</h2>
+        <h2>这个不错啊</h2>
+        <input type="text">
+        <input type="text">
+        <input type="button" value="输入">
+        <input type="button" value="输入"><br>
+        <a href="http://www.baidu.com" target="_blank">百度一哈</a>
+    </div>
+</body>
+</html>

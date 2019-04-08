@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script>
+        window.onload = function (evt) {
+            var inputs = document.getElementsByTagName('input');
+            for (var i = 0; i < inputs.length; i++) {
+                if (inputs[i].type == 'button') {                   
+                    inputs[i].onclick = function () {
+                        //先将其他button都设置为'哈哈'
+                        for (var j = 0; j < inputs.length; j++) {
+                            if (inputs[j].type == 'button') {
+                                inputs[j].value = '哈哈';
+                            }
+                        }
+                        this.value = '呜呜';  //注意这里是 this 得到当前的对象,要注意什么时候用This
+                    };
+                }
+            }          
+        };
+    </script>
+</head>
+<body>
+    <input type="button"  name="btn1" value="哈哈" />
+    <input type="button"  name="btn1" value="哈哈" />
+    <input type="button"  name="btn1" value="哈哈" />
+    <input type="button"  name="btn1" value="哈哈" />
+    <input type="button"  name="btn1" value="哈哈" />
+    <input />
+    <input />
+    <input />
+</body>
+</html>

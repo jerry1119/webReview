@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script>
+        window.onload = function () {
+            var txts = document.getElementsByTagName('input');
+            for (var i = 0; i < txts.length; i++) {
+                txts[i].onfocus = function () {
+                    this.style.backgroundColor = 'yellow';
+                };
+                txts[i].onblur = function () {
+                    this.style.backgroundColor = 'white';
+                };
+            }
+        };
+    </script>
+</head>
+<body>
+    <input />
+    <input />
+    <input />
+    <input />
+    <input />
+    <input />
+    <input />
+    <input />
+    <input />
+</body>
+</html>

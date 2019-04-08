@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .cls{
+            color: gray;
+            font-size: 30px;           
+        }
+    </style>
+    <script>
+        window.onload = function(){
+            var txtobj = document.getElementById('txt1');
+            //鼠标进入事件
+            txtobj.onfocus = function(){
+                if(this.value=='请输入信息'){
+                    this.value='';
+                }
+                this.style.color = 'black';
+            };
+            //鼠标移出事件，如果为空，则提示输入信息；
+            txtobj.onblur = function(){
+                if(this.value.length<1){
+                    this.value = '请输入信息';
+                    this.style.color = 'gray';
+                }
+            };
+        };
+    </script>
+</head>
+<body>
+    <input type="text" class="cls" id="txt1" value="请输入信息">
+</body>
+</html>

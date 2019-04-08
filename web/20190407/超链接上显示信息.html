@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- 鼠标移到超链接上，出现一个窗口显示出详细信息 -->
+</head>
+<style>
+    #info{
+        width:200px;
+        height:400px;
+        position:absolute;
+        display:none;
+    }
+    img{
+        width: 200px;
+        height:300px;
+    }
+</style>
+<script>
+    window.onload = function () {
+        var linkobj = document.getElementById('meizi');
+        var infoobj = document.getElementById('info');
+        //鼠标移入事件
+        linkobj.onmouseover=function(evt){
+            //得到鼠标的位置
+            var e = window.event||evt;//解决兼容性问题
+            var x = e.clientX;//获取鼠标坐标
+            var y = e.clientY;
+            infoobj.style.display = 'block';
+            infoobj.style.left = x+'px';//设置详细信息位置,一定不能忘了加单位
+            infoobj.style.top = y+'px';
+            infoobj.style.backgroundColor='yellow';
+        };
+        //鼠标移出事件
+        linkobj.onmouseout = function(){
+            infoobj.style.display = 'none';
+        };
+    };
+</script>
+<body>
+    <div id='info'>
+        <p>妹子信息：</p>
+        <img src="images/3079.jpg" alt="妹子">
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <!-- 发现一个问题，超链接前面不加http://的话，他不能正确转跳，而是指向了当前目录 -->
+    <span>mfrekgjeroigjp我们来看一下<a href="http://www.douyu.com" target="_blank" id="meizi">美女</a>吧</span>
+</body>
+</html>

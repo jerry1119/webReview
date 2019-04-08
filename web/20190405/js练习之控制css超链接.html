@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script>
+        window.onload = function () {
+            var links = document.getElementsByTagName('a');
+            for (var i = 0; i < links.length; i++) {
+                links[i].onclick = function () {
+                    var links2 = document.getElementsByTagName('a');
+                    for (var j = 0; j < links2.length; j++) {
+                        links2[j].style.backgroundColor = 'white';
+                    }
+                    this.style.backgroundColor = 'red';
+                    //window.event.returnValue = false;
+                    //直接return false就可以了。。
+                    return false;
+                };
+            }
+        };
+    </script>
+</head>
+<body>
+    <a href="www.baidu.com">hahahha</a>
+    <a href="www.baidu.com">hahahha</a>
+    <a href="www.baidu.com">hahahha</a>
+    <a href="www.baidu.com">hahahha</a>
+    <a href="www.baidu.com">hahahha</a>
+    <a href="www.baidu.com">hahahha</a>
+    
+</body>
+</html>

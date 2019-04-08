@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+   p{
+       font-size: 20px;
+   }
+    div{
+        margin-left: 45%;
+    }
+    </style>
+    <script>
+    window.onload = function(){
+        //1.得到div下 input  type为checkbox的
+        //2.为每一个注册单机事件
+        //3.循环遍历，判断是否为checked,把他们加到集合中
+        //4.将数量和值显示到text中
+        var cbs = document.getElementById('div1').getElementsByTagName('input');
+        for (var i = 0; i < cbs.length; i++) {
+            if(cbs[i].type=='checkbox'){
+                cbs[i].onclick = function () {
+                    var arry = new Array();
+                    for (let i = 0; i < cbs.length; i++) {
+                        const element = cbs[i];
+                        //经过调试发现，要获得一个元素的属性，直接这个元素 . 就行了，而设置的时候才是 元素.style.xxx = 这时候才加style
+                        // console.log(element.checked);
+                        // console.log(element.type);
+                        //设置样式的时候可能是 checked == 'checked',但是取值的时候就是 ==true了
+                        if(element.type=='checkbox' && element.checked==true){
+                            //alert(element);
+                            //这里的技巧是通过数组的长度来作为下标添加数据
+                            arry[arry.length]=element.value;
+                        }
+                    }
+                    //获取个数，并显示值
+                    document.getElementById('info').innerHTML='共选中了'+arry.length+'项，分别是'+arry.toString();
+                }
+            }
+            }
+    };
+    </script>
+</head>
+<body>
+    <div id="div1">
+            <input type="checkbox" name="" id="cb1" value="猫猫"><span>猫猫</span>
+            <input type="checkbox" name="" id="cb2" value="狗狗"><span>狗狗</span>
+            <input type="checkbox" name="" id="cb3" value="组织"><span>组织</span>
+            <input type="checkbox" name="" id="cb4" value="阳阳"><span>阳阳</span>
+            <input type="checkbox" name="" id="cb5" value="哈哈"><span>哈哈</span><br>
+            <p id="info">共选中了0项，分别是:</p>
+    </div>
+    
+</body>
+</html>

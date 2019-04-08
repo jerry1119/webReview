@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-CN"> 
+    <!-- 语言改为中文，打开页面就不会跳出翻译了 -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        select{
+            width: 80px;
+            height:100px;
+        }
+    </style>
+    <script src="./js/权限选择界面.js"></script>
+</head>
+<body>
+    <select name="" id="s1" multiple>
+        <option value="增加">增加</option>
+        <option value="修改">修改</option>
+        <option value="删除">删除</option>
+        <option value="查询">查询</option>
+        <option value="保存">保存</option>
+    </select>
+    <input type="button" value=">>" id="btnAllRight">
+    <input type="button" value=">" id="btnSelectRight">
+    <input type="button" value="<" id="btnSelectLeft">
+    <input type="button" value="<<" id="btnAllLeft">
+    <select name="" id="s2" multiple></select>
+</body>
+</html>

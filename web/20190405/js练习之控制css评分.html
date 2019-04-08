@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        td {
+            font-size:100px;            
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var tds = document.getElementsByTagName('td');
+            for (var i = 0; i < tds.length; i++) {
+                //为每个td设置分数：
+                tds[i].setAttribute('curScore', 10 * (i + 1));
+
+                //绑定onmouseover事件
+                tds[i].onmouseover = function () {
+                    //设置鼠标指针样式为：手形状
+                    this.style.cursor = 'grab';
+                    var tdArr = document.getElementsByTagName('td');
+                    //一开始把所有的都设为'☆';
+                    for (var j = 0; j < tdArr.length; j++) {
+                        tdArr[j].innerHTML = '☆';
+                        tdArr[j].removeAttribute('isClicked');
+                    }   
+                    //鼠标在哪就把那设置成'★'
+                    for (var j = 0; j < tdArr.length; j++) {
+                        tdArr[j].innerHTML = '★';
+                       
+                        //只是把到当前的变为实心，所以这里break;
+                        if (tdArr[j] == this) {
+                            break;
+                        }
+                    }                                                      
+                };
+                //绑定鼠标离开事件
+                tds[i].onmouseout = function () {
+                    var tdArr = document.getElementsByTagName('td');
+                    //设置index记录是哪个td有idclicked属性
+                    var tdIndex = -1;
+                    //1.把所有五角星清空
+                    for (var j = 0; j < tdArr.length; j++) {
+                        tdArr[j].innerHTML = '☆';          
+                        if (tdArr[j].getAttribute('isClicked')) {
+                            tdIndex = j;
+                        }
+                    } 
+                    //2.那个有isClicked属性值就是被点击了，就添加实心五角星
+                    for (var j = 0; j <= tdIndex; j++) {
+
+                        tdArr[j].innerHTML = '★';
+                      
+                    } 
+                };
+                //点击显示当前分数:
+                tds[i].onclick = function () {
+                    var tdArr = document.getElementsByTagName('td');
+                    for (var l = 0; l < tdArr.length; l++) {
+                        tdArr[l].removeAttribute('isClicked');
+                    }
+                    this.setAttribute('isClicked', 'isClicked');
+
+                    alert('你的分数为：'+this.getAttribute('curScore'));
+                };
+            }
+           
+            
+        };
+       
+    </script>
+</head>
+<body>
+    <table>
+        <tr>
+            <td>☆</td>
+            <td>☆</td>
+            <td>☆</td>
+            <td>☆</td>
+            <td>☆</td>
+        </tr>
+    </table>
+</body>
+</html>

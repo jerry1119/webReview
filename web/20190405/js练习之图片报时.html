@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script>
+        window.onload = function () {
+            setTime();
+            setInterval(setTime,1000);
+        };
+        function setTime() {
+            var time = new Date();
+            var hh = time.getHours();
+            var ss = time.getSeconds();
+            var picPath = 'C:\\Users\\Administrator\\Desktop\\2019learn\\0404javascript\\美女时钟图片素材\\' + (hh < 10 ? '0' + hh : hh) + '_' + (ss < 10 ? '0' + ss : ss) + '.jpg';
+            document.getElementById('pic').src = picPath;
+        };
+    </script>
+</head>
+<body>
+    <img src="#" id="pic" alt="Alternate Text" />
+</body>
+</html>

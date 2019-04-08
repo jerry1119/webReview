@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script>
+        window.onload = function () {
+            var waitTime = 4;
+            var btn = document.getElementById('btn1');
+            var interValId = setInterval(function () {
+                if (waitTime > 0) {
+                    btn.value = '请仔细阅读协议(' + waitTime + ')';
+                    waitTime--;
+                }
+                else {
+                    btn.value = '同意';
+                    btn.disabled = false;
+                    clearInterval(interValId);
+                }
+            }, 1000);
+        };
+       
+    </script>
+</head>
+<body>
+    <!--不小心在id 名字这里多打了个空格,需要注意下-->
+    <input disabled type="button" id="btn1" value="请仔细阅读协议(5)" />
+</body>
+</html>

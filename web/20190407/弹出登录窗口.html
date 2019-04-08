@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #div1{
+            display: none;
+            position:absolute;
+            height:250px;
+            width: 200px;
+            border: 1px solid red;
+        }
+    </style>
+    <script>
+        window.onload = function(){
+            document.getElementById('btnLogin').onclick = function(){
+
+                var divobj = document.getElementById('div1');
+                divobj.style.display = 'block';
+                console.log('body宽高:'+document.body.clientWidth+'高：'+document.documentElement.clientHeight);
+                console.log('div宽高：'+divobj.offsetWidth+':::'+divobj.offsetHeight);
+                //又忘了，取标签的属性的时候，不用 .style，只是在设置的时候才用，其次应该用offsetHeight而不是Height
+                //获取body对象的宽高用document.body.clientHeight
+                //获取网页整个页面的高度用 document.documentElement.clientHeight;这里用这个好
+                divobj.style.left = (document.body.clientWidth-divobj.offsetWidth)/2+'px';
+                divobj.style.top = (document.documentElement.clientHeight-divobj.offsetHeight)/2+'px';
+            };
+            //关闭窗口
+            document.getElementById('btnClose').onclick = function(){
+                var divobj = document.getElementById('div1');
+                divobj.style.display = '';
+            };
+        };
+    </script>
+</head>
+<body>
+<input type="button" value="登录" id="btnLogin">
+<div id="div1">
+    <span>用户名：</span><input type="text"><br>
+    <span>密码:</span><input type="password" name="pwd" id="pwd"><br>
+    <input type="button" value="确定"><input type="button" value="关闭" id="btnClose">
+</div>
+</body>
+</html>

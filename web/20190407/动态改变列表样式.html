@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    li{
+        
+    }
+</style>
+<script>
+    window.onload =function(){
+        //得到所有的列表对象
+        var soocerList = document.getElementById('listobj').getElementsByTagName('li');
+        for (let i = 0; i < soocerList.length; i++) {
+            const soocerobj = soocerList[i];
+            //鼠标进入时将当前列表字体颜色改为红色
+            soocerobj.onmouseover = function(){              
+                //设置字体颜色是 .color 而设置背景颜色则为backgroundColor;
+                this.style.color = 'red';
+            };
+            //鼠标离开时将当前列表字体颜色改为白色
+            soocerobj.onmouseout = function(){
+                this.style.color = 'white';
+            };
+            //鼠标点击时，将当前的列表字体变为30px
+            soocerobj.onclick = function(){
+                //先把其他的列表项字体大小恢复默认
+                for (let j = 0; j < soocerList.length; j++) {
+                    const element = soocerList[j];
+                    element.style.fontSize = '';
+                }
+                this.style.fontSize = '30px';
+            };
+        }
+    };
+</script>
+<body>
+    <ul id="listobj">
+        <li>曼联</li>
+        <li>曼联</li>
+        <li>曼联</li>
+        <li>曼联</li>
+        <li>曼联</li>
+        <li>曼联</li>
+        <li>曼联</li>
+        <li>曼联</li>
+    </ul>
+</body>
+</html>

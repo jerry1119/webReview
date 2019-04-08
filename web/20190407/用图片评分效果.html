@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- 我是用两张图片做的，可以用一张图片，图片上两种状态都有，然后通过设置backgroundposition来设置想要显示的状态 -->
+    <!-- 例子中是做了几个td，将td的background-img设为了那张图片 -->
+    <style>
+    img{
+        width: 50px;
+        height: 50px;
+    }
+    </style>
+    <script>
+    window.onload = function(){
+        //获取img对象，给每个对象绑定鼠标移入和移出事件
+        var imgs = document.getElementsByTagName('img');
+        var showScore = document.getElementById('p1');
+        for (let i = 0; i < imgs.length; i++) {
+            const element = imgs[i];
+            //为每个img设置对应的分数
+            element.setAttribute('score',i+1);
+            //鼠标移入事件
+            element.onmouseover = function(){
+                //一开始就重置为空五角星
+                for(var i = 0;i<imgs.length;i++){
+                    imgs[i].src='images/starEmpty.jpg';
+                }
+                for (let j = 0; j < imgs.length; j++) {
+                    //判断将到当前对象为止的img都设为实心五角星
+                    imgs[j].src='images/starFill.jpg';
+                    //显示当前的分数
+                    showScore.innerHTML=getAppraise(this.getAttribute('score'));
+                    if(imgs[j]==this)
+                    {
+                        break;
+                    }
+                }               
+            };
+            //鼠标移出事件
+            element.onmouseout= function(){
+                var index = -1;
+                //将图片恢复为默认空五角星状态；
+                for(var k = 0;k<imgs.length;k++){
+                    imgs[k].src='images/starEmpty.jpg';
+                    //记录下哪一个有isClicked属性的index
+                    if(imgs[k].getAttribute('isClicked')){
+                        index = k;
+                        showScore.innerHTML=getAppraise(imgs[k].getAttribute('score')) ;
+                    }                  
+                }
+                //假如有isClicked属性，则给他把实心加上去
+                if(index>=0){
+                    for(var i = 0;i<index+1;i++){
+                    imgs[i].src='images/starFill.jpg';
+                }
+                }else{
+                    showScore.innerHTML='请评分';
+                }
+               
+            };
+            //设置点击事件，点击之后记录选择的分钟，并保留当前选择的分数
+            element.onclick = function(){
+                //先将之前的isClicked属性情况，重新设置
+                for(var i = 0;i<imgs.length;i++){
+                    imgs[i].removeAttribute('isClicked');
+                }
+                //给他设置一个属性，表示被点击了               
+                this.setAttribute('isClicked','isClicked');
+
+                
+            };
+        }
+        function getAppraise(score){
+            switch (score) {
+                case '0':
+                    return '请评分';
+                    break;
+                case '1':
+                    return '很差';
+                    break;
+                case '2':
+                    return '一般';
+                    break;
+                case '3':
+                    return '满意';
+                    break;
+                case '4':
+                    return '非常满意';
+                    break;
+                case '5':
+                    return '无可挑剔';
+                    break;
+
+                default:
+                    return '默认请评分';
+                    break;
+            }
+        }
+    };
+    
+    </script>
+</head>
+<body>
+    <img src="images/starEmpty.jpg" alt="空评分">
+    <img src="images/starEmpty.jpg" alt="空评分">
+    <img src="images/starEmpty.jpg" alt="空评分">
+    <img src="images/starEmpty.jpg" alt="空评分">
+    <img src="images/starEmpty.jpg" alt="空评分">
+    <p id="p1">评价：</p>
+</body>
+</html>

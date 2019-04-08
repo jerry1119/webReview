@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        window.onload = function(){
+            
+            var cboxs = document.getElementsByTagName('input');
+            document.getElementById('btn1').onclick = function(){
+                for (let i = 0; i < cboxs.length; i++) {
+                    const element = cboxs[i];
+                    if(element.type=='checkbox'){
+                        element.checked=true;  //js中应该用 true 和 false而不是用 = 'checked'
+                    }
+                }
+            };
+            
+            document.getElementById('btn2').onclick = function(){
+                for (let i = 0; i < cboxs.length; i++) {
+                    const element = cboxs[i];
+                    if(element.type=='checkbox'){
+                        element.checked=false;
+                    }
+                }
+            };
+            
+            document.getElementById('btn3').onclick = function(){
+                for (let i = 0; i < cboxs.length; i++) {
+                    const element = cboxs[i];
+                    if(element.type=='checkbox'){
+                        // if(element.checked){
+                        //     element.checked='';
+                        // }
+                        // else{
+                        //     element.checked=true;
+                        // }
+                        //简单写法如下
+                        element.checked = !element.checked;
+                    }
+                }
+            };
+            
+        };
+    </script>
+</head>
+<body>
+    <ul>
+        <li><input type="checkbox" name="" id="cb1">刘亦菲</li>
+        <li><input type="checkbox" name="" id="cb2">苍进空</li>
+        <li><input type="checkbox" name="" id="cb3">泷泽萝拉</li>
+        <li><input type="checkbox" name="" id="cb4">水野朝阳</li>
+        <li><input type="checkbox" name="" id="cb5">麻生希</li>
+    </ul>
+    <input type="button" value="全选" id="btn1">
+    <input type="button" value="全不选" id="btn2">
+    <input type="button" value="反选" id="btn3">
+</body>
+</html>

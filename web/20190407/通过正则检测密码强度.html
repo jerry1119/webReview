@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+    <style>
+        td{
+            border: 1px solid black;    
+            font-size: 15px;
+            width: 50px;
+        }
+    </style>
+    <script>
+        //忘了加window.onload了
+        window.onload = function () {
+            //给密码框设置鼠标弹起事件
+            document.getElementById('pwd').onkeyup = function () {
+                //初始化颜色;
+                var tds = document.getElementById('tb1').getElementsByTagName('td');
+                for (let i = 0; i < tds.length; i++) {
+                    const element = tds[i];
+                    element.style.backgroundColor='';
+                }
+                //获得当前的密码
+                var password = this.value;
+                console.log(password);
+                if(password.length>0){
+                    //判断密码强度
+                var strong = checkPwd(password);
+                console.log(strong);
+                //根据密码强度设置样式               
+                    switch (strong) {
+                        //密码强度弱
+                    case 0:
+                        tds[0].style.backgroundColor='red';
+                        break;
+                    case 1:
+                        tds[0].style.backgroundColor='red';
+                        break;
+                    case 2:
+                        tds[0].style.backgroundColor='red';
+                        break;
+                        //密码强度中
+                    case 3:
+                        tds[0].style.backgroundColor='yellow';
+                        tds[1].style.backgroundColor='yellow';
+                        break;
+                    case 4:
+                        tds[0].style.backgroundColor='yellow';
+                        tds[1].style.backgroundColor='yellow';
+                        break;
+                        //密码强度强
+                    case 5:
+                        tds[0].style.backgroundColor='lime';
+                        tds[1].style.backgroundColor='lime';
+                        tds[2].style.backgroundColor='lime';
+                        break;
+                
+                    default:
+                        break;
+                }
+                }                
+            };
+        };
+        //判断密码强度
+        function checkPwd (pwd){
+            var strong = 0;
+            //有大写字母强度加一 ,注意：括号里面写正则，不同写引号 
+            if(pwd.match(/[A-Z]/)){
+                strong++;
+            }
+            //有小写字母强度加一
+            if(pwd.match(/[a-z]/)){
+                strong++;
+            }
+            //有数字强度加一
+            if(pwd.match(/\d/)){
+                strong++;
+            }
+            //有特殊符号强度加一
+            if(pwd.match(/[^a-zA-Z0-9]/)){
+                strong++;
+            }
+            //密码长度大于8强度加一
+            if(pwd.length>7){
+                strong++;
+            }
+            return strong;
+            
+        }
+    </script>
+<body>
+    <input type="password" name="" id="pwd">
+    <table id="tb1">
+        <tr>
+            <td id="td1">弱</td>
+            <td id="td2">中</td>
+            <td id="td3">强</td>
+        </tr>
+    </table>
+</body>
+</html>

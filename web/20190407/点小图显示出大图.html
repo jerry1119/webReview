@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #div1{
+            margin-top: 100px;                       
+        }
+        #divInfo{
+            display: none;
+        }
+    </style>
+    <script>
+        // 注意用this.src得到的路径是浏览器编译后得到的完整路径，而用this.getAttribute('src')得到的则是原先设置的
+        //是什么就是什么
+        var datas = {
+            "images/1-1.jpg": ["images/1.jpg", "张三", "178cm"],
+            "images/2-1.jpg": ["images/2.jpg", "李四", "180cm"],
+            "images/3-1.jpg": ["images/3.jpg", "王五", "170cm"]
+        };
+        window.onload = function () {
+                document.getElementById('btn').onclick = function () {
+                    var divobj = document.getElementById('div1');
+                    //动态创建小图片
+                    for (const key in datas) {
+                        if (datas.hasOwnProperty(key)) {
+                            const userInfo = datas[key];
+                            var linkobj = document.createElement('img');
+                            linkobj.src = key;
+                            linkobj.alt=userInfo[1];
+                            linkobj.style.marginRight='100px;'
+                            divobj.appendChild(linkobj);
+                            //为每张小图片创建onmouseover事件
+                            linkobj.onmouseover = function(){
+                                var divInfoobj = document.getElementById('divInfo');
+                                //显示出详细信息
+                                divInfoobj.style.display='block';
+                                divInfoobj.style.backgroundColor='yellow';
+                                //divInfoobj.style.width='200px';
+                                divInfoobj.style.position = 'absolute';
+                                document.getElementById('pName').innerHTML = userInfo[1];
+                                document.getElementById('pHeight').innerHTML = userInfo[2];
+                                document.getElementById('imgBig').src =userInfo[0];
+                                //设置div的位置
+                                divInfoobj.style.left = this.offsetLeft+'px';
+                                divInfoobj.style.top = this.offsetHeight+this.offsetTop +'px';
+                            };
+                            linkobj.onmouseout = function(){
+                                document.getElementById('divInfo').style.display='none';
+                            };
+                        }
+                    }
+            };
+            
+        };
+    </script>
+</head>
+<body>
+    <input type="button" value="显示图片" id="btn">
+    <div id='div1'>
+       
+    </div>
+   <div id='divInfo'>
+        <p>妹子信息：</p>
+        <p id="pName">姓名：</p>
+        <p id="pHeight">身高：</p>
+        <img src="#" alt="妹子" id="imgBig">
+   </div>
+</body>
+</html>
