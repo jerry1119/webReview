@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./lib/jquery-1.11.3.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <select name="pro" id="proSel"></select>
+    <select name="city" id="citySel"></select>
+    <script>
+        // 第一步： 初始化好所有的省信息
+        // 模拟从ajax获取的数据
+        var data = [{
+            name: "北京",
+            cities: ["西城", "东城", "崇文", "宣武", "朝阳", "海淀", "丰台", "石景山", "门头沟", "房山", "通州", "顺义", "大兴", "昌平", "平谷", "怀柔",
+                "密云", "延庆"
+            ]
+        },
+        {
+            name: "天津",
+            cities: ["青羊", "河东", "河西", "南开", "河北", "红桥", "塘沽", "汉沽", "大港", "东丽", "西青", "北辰", "津南", "武清", "宝坻", "静海", "宁河",
+                "蓟县", "开发区"
+            ]
+        },
+        {
+            name: "河北",
+            cities: ["石家庄", "秦皇岛", "廊坊", "保定", "邯郸", "唐山", "邢台", "衡水", "张家口", "承德", "沧州", "衡水"]
+        },
+        {
+            name: "山西",
+            cities: ["太原", "大同", "长治", "晋中", "阳泉", "朔州", "运城", "临汾"]
+        }
+        ];
+        $(function(){
+            //初始化省的信息
+            initProSel();
+            $('#proSel').change(function(){
+                for (let i = 0; i < data.length; i++) {
+                    const proCities = data[i];
+                    //jQuery和js一样 this得到的都是当前的dom元素
+                    // if(proCities.name==this.value){
+                    //     console.log(this.value);
+                    // }
+                    //也可以用他的包装对象的val()方法得到value
+                    if(proCities.name==$('#proSel').val()){
+                        var cities = proCities.cities;
+                        initCitSel(cities);
+                    }
+                }
+            });
+            //触发省chagne的事件处理程序 , 注意这个要写在change事件方法的下面才行
+            $('#proSel').triggerHandler('change');
+        });
+        function initProSel(){
+            var strHTMLArry = [];
+            for (let i = 0; i < data.length; i++) {
+                const proName = data[i].name;
+                // 把拼接好的 标签放到  省的select下面
+                // jQuery的html方法已经对ie8的 select设置innerHTML的bug做了相关处理。可以直接用。
+                strHTMLArry.push('<option value='+proName+'>'+proName+'</option>');
+            }
+            $('#proSel').html(strHTMLArry.join(' '));
+        };
+        function initCitSel(cities){
+            var strHTMLArry = [];
+            for (let i = 0; i < cities.length; i++) {
+                const city = cities[i];
+                strHTMLArry.push('<option value='+city+'>'+city+'</option>');
+            }
+            strHTMLArry.join(' ');
+            $('#citySel').html(strHTMLArry);
+        };
+    </script>
+</body>
+</html>

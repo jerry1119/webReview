@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+        <input type="button" value="按钮" id="btn">
+        <ul class="list">
+          <li>1</li>
+          <li>2</li>
+          <li>3</li>
+          <li>4</li>
+          <li>5</li>
+          <li>6</li>
+          <li>7</li>
+          <li>8</li>
+          <li>9</li>
+          <li>10</li>
+        </ul>
+
+        <ul class="ac">
+                <li class="ac-item on">
+                  <div class="ac-item-hd">头部1</div>
+                  <div class="ac-item-bd">内容1</div>
+                </li>
+                <li class="ac-item">
+                  <div class="ac-item-hd">头部2</div>
+                  <div class="ac-item-bd">内容2</div>
+                </li>
+                <li class="ac-item">
+                  <div class="ac-item-hd">头部3</div>
+                  <div class="ac-item-bd">内容3</div>
+                </li>
+                <li class="ac-item">
+                  <div class="ac-item-hd">头部4</div>
+                  <div class="ac-item-bd">内容4</div>
+                </li>
+        </ul>
+        <!--1. 语法：bind(type,[data],fn)，这个也是包装对象的方法。 -->
+        <script>
+            $("form").bind("submit", function () {
+                return false; // 取消默认操作。
+            })
+
+            // 同时绑定多个事件
+            $('#foo').bind('mouseenter mouseleave', function () {
+                $(this).toggleClass('entered');
+            });
+
+            //同时绑定多个事件类型/处理程序
+            $("button").bind({
+                click: function () {
+                    $("p").slideToggle();
+                },
+                mouseover: function () {
+                    $("body").css("background-color", "red");
+                },
+                mouseout: function () {
+                    $("body").css("background-color", "#FFFFFF");
+                }
+            });
+        </script>
+        <!--2. 语法：$dom.one(type,[data],fn)绑定事件只执行一次的事件处理程序 -->
+        <script>
+            // 当所有段落被第一次点击的时候，显示所有其文本。
+            $("p").one("click", function () {
+                alert($(this).text());
+            });
+        </script>
+        <!-- 3.jQuery 给所有匹配的元素附加一个事件处理函数，即使这个元素是以后再添加
+            进来的也有效 语法： $dom.live(type, [data], fn)-->
+        <script>
+            // 先绑定事件
+            $('.clickme').live('click', function () {
+                alert("Live handler called.");
+            });
+            // 然后再添加一个新元素：
+            $('body').append('<div class="clickme">Another target</div>');
+        </script>
+        <!-- 4. 事件委托绑定语法： $dom.delegate(selector,[type],[data],fn) -->
+        <script>
+            // jQuery 代码:
+            $("div").delegate("button", "click", function () {
+                $("p").slideToggle();
+            });
+        </script>
+        <!-- 5.大一统的on绑定事件方法 $dom.on(events,[selector],[data],fn) -->
+        <!-- 自 jQuery 版本 1.7 起，on() 方法是 bind()、live() 和 delegate() 方法的新的替代品。
+            on()方法绑定事件处理程序到当前选定的jQuery对象中的元素。on汇总了bind和live两种绑定事
+            件的方式。可以支持一般的bind方法或者委托的方法。 -->
+        <!-- events:一个或多个用空格分隔的事件类型和可选的命名空间，如"click"或"keydown.myPlugin" 。 -->
+        <!-- selector:一个选择器字符串用于过滤器的触发事件的选择器元素的后代。如果选择的< null或省略，当它到达选定的元素，事件总是触发 -->
+        <script>
+            $(function () {
+                // on 替代 bind绑定事件的方式。
+                $('#btn').on('click', function (e) {
+                    console.log(123);
+                });
+
+                // on 替代 live 动态创建元素绑定事件的方法
+                // dom动态创建
+                // var domP = document.createElement('p');
+                // domP.innerHTML = "1234";
+                // $(domP).on('click', function(e) {
+                //   console.log($(this).text());
+                // })
+                // document.body.appendChild(domP);
+                // jQuery 动态创建dom标签,
+                var $p = $('<p>123445667</p>');
+
+                // 给动态标签绑定事件
+                $p.on('click', function (e) {
+                    console.log($(this).text());
+                });
+
+                // 给页面中的body添加$p标签
+                $("body").append($p);
+
+                // jQuery构造函数的用法复习
+                // 1、接受一个回调函数，作为：document ready事件
+                // 2、可以接受一个字符串作为 选择器进行选择页面中元素，返回jQuery包装对象。
+                // 3、可以接受一个dom对象，将dom对象转换 jQuery包装对象
+                // 4、可以接受一个html标签字符串，创建成jQuery包装对象
+
+
+                // On 替代delegate方法
+                $('.list').on('click', 'li', function (e) {
+                    console.log($(this).html());
+                });
+
+                //on绑定自定义事件
+                var $btn = $('#btn');
+                // 绑定自定义事件myevent
+                $btn.on('myevent', function (e, a, b, c) {
+                    console.log(e.type, a, b, c);
+                });
+
+                // 触发自定义事件，并给自定义事件传递参数
+                $btn.trigger('myevent', [1, 2, 3]);
+                // =>myevent 1 2 3
+            });
+        </script>
+        
+        <script>
+            $(function () {
+                $('.ac-item-hd').on('click', function (e) {
+                    // addClass 添加样式类
+                    $(this).parent().addClass('on');
+                    // removeClass是移除样式类
+                    $(this).parent().siblings('li').removeClass('on');// 隐式迭代。
+                });
+            });
+        </script>
+
+        <!--6. 解绑事件 -->
+        <!-- 语法：$dom.unbind(type,[fn]) 解绑bind
+        语法： $dom.die(type, [fn])  解绑live
+        语法： undelegate([selector,[type],fn]) 解绑deleget
+        语法：off(events,[selector],[fn])  解绑 on
+        // 解绑on的click事件
+        // $('.list li').off('click');
+
+        // 解绑所有的事件
+        // $('.list li').off(); -->
+
+        <!--7. 事件命名空间 -->
+        <!-- 如果一个dom标签上添加的事件非常多的时候，有时候需要进行对这些事件做一些分类和统一处理。
+            那么对绑定的事件分类就需要用到事件的命名空间。 -->
+        <!-- // 给按钮绑定多个jQuery的事件
+          // 给按钮绑定点击事件，后面的.和demo就是命名空间
+          $('#btn').on('click.demo', function (e) {
+            console.log('click.demo');
+          });
+        
+          // 绑定点击事件不带命名空间
+          $('#btn').on('click', function (e) {
+            console.log('click');
+          });
+        
+          // 绑定blur事件带demo命名空间
+          $('#btn').on('blur.demo', function (e) {
+            console.log('blur.demo');
+          });
+        
+          // $('#btn').off('.demo'); // 解绑所有的demo命名空间的事件  click.demo 和blur.demo
+          // $('#btn').trigger('click');  // 触发所有的click事件，包括所有的命名空间的
+          // $('#btn').trigger('click.demo');  // 只触发click.demo命名空间的事件 -->
+
+          <!--8. 合成鼠标进入和离开的hover方法
+        jQuery为鼠标进入和离开提供了一个简便的绑定事件的方法hover(enter, leave)。hover方法接受两个参数，第一个参数是鼠标进入的事件处理程序，第二个是鼠标离开的事件处理程序。
+        用法:
+        $(function(){
+          $('tr').hover(function(e){
+            $(this).css('backgroundColor', '#ccc');
+          },function(e){
+            $(this).css('backgroundColor', '#fff');
+          });
+        }) -->
+</body>
+</html>

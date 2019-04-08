@@ -1,12 +1,67 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>属性选择器和筛选方法</title>
+    <script src="./lib/jquery-1.11.3.min.js"></script>
+   
+    <!-- 属性选择器 -->
+    <!-- 用法	                        说明
+        $("p[attr]")	            选取所有该p标签且具有attr属性的节点
+        $("p[attr=a_value]")	    选取所有p标签且具有attr属性并满足属性值为a_value的节点
+        $("p[attr^=a_value_head]")	选取所有p标签且attr属性的属性值是以a_value_head开头的
+        $("p[attr$=a_value_end]")	选取所有p标签且attr属性的属性值是以a_value_end结尾的
+        $("p[attr*=a_value")	    选取所有p标签且attr属性的属性值中包含a_value -->
+    <!-- 筛选方法 -->
+     <!--   语法	            用法	                说明
+     parent()	        $("#first").parent();	    查找父亲
+     children(selector)	$("ul").children("li")	    相当于$("ul>li")，子类选择器
+     find(selector)	    $("ul").find("li");	        相当于$("ul li"),后代选择器
+     siblings(selector)	$("#first").siblings("li");	查找兄弟节点，不包括自己本身。
+     nextAll([expr])	$("div:first").nextAll()	查找当前元素之后所有的同辈元素。
+     prevtAll([expr])	$("div:first").prevAll()	查找当前元素之前所有的同辈元素
+     hasClass(class)	$('div').hasClass("protected")	检查当前的元素是否含有某个特定的类，如果有，则返回true。
+     eq(index)	        $("li").eq(2);	            相当于$("li:eq(2)"),index从0开始
+     not(exp)	        $("p").not("#selected")	    删除与指定表达式匹配的元素 -->
 </head>
 <body>
-    
+    <!-- 互斥选择例子 -->
+    <table border="1">
+            <tr>
+              <td>用户名</td>
+              <td>年龄</td>
+              <td>联系</td>
+            </tr>
+            <tr>
+              <td>老马1</td>
+              <td>20</td>
+              <td>qq:515154084</td>
+            </tr>
+            <tr>
+              <td>弗兰德</td>
+              <td>23</td>
+              <td>332</td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>2</td>
+              <td>3</td>
+            </tr>
+    </table>
+    <script>
+        $(function(){
+            // jQuery可以通过 原型上的click方法进行绑定点击事件。
+            // $('tr');// 选择到了所有的tr
+            $('tr').click(function(){// 存在隐式迭代。
+                // 点击了当前行， 那么让当前行 背景高亮，让其他的兄弟节点背景不高亮。
+                // jQuery的事件处理程序中。 this依然指向 绑定事件dom对象。
+                $(this).css('backgroundColor','gray');
+                 // 拿到多个兄弟节点，隐式迭代全部设置背景为白色。
+                $(this).siblings().css('backgroundColor','white');
+            });
+        });
+    </script>
 </body>
 </html>
