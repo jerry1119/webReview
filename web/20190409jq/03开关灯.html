@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../lib/jquery-1.11.3.min.js"></script>
+    <style>
+        .cls{
+            background-color: black;
+        }
+    </style>
+</head>
+<body >
+    <input type="button" value="关灯" id="btn">
+    <script>
+        $(function(){
+            $('#btn').click(function(){
+                if($(this).val()=='关灯'){
+                    // this.value = '开灯';
+                    $(this).val('开灯'); //也可以这样写
+                    //这两种写法都可以
+                    // $('body').addClass('cls');
+                    // $('body').attr('class','cls');
+                }else{
+                    this.value = '关灯';
+                    //这两种写法都可以
+                    // $('body').removeClass('cls');
+                    // $('body').removeAttr('class','cls');
+                }
+                //直接用 .togleClass更方便 ,切换样式类：如果有则去掉，如果没有则加上。
+                $('body').toggleClass('cls');
+            });
+        });
+    </script>
+</body>
+</html>

@@ -26,7 +26,8 @@
                     var arry = new Array();
                     for (let i = 0; i < cbs.length; i++) {
                         const element = cbs[i];
-                        //经过调试发现，要获得一个元素的属性，直接这个元素 . 就行了，而设置的时候才是 元素.style.xxx = 这时候才加style
+                        //经过调试发现，要获得一个元素的属性，直接这个元素 . 就行了，
+                        //而设置的时候才是 元素.style.xxx = 这时候才加style (错了，应该是css才加.style.属性则不写)
                         // console.log(element.checked);
                         // console.log(element.type);
                         //设置样式的时候可能是 checked == 'checked',但是取值的时候就是 ==true了

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../lib/jquery-1.11.3.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <table class="list">
+        <thead>
+            <th>用户名</th>
+            <th>邮箱</th>
+            <th>年龄</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td>老马</td>
+                <td>malun666@126.com</td>
+                <td>18</td>
+            </tr>
+        </tbody>
+    </table>
+    <script>
+        var data = [{
+            name: 'laoma11',
+            mail: 'flydragonml@gmail.com',
+            age: 19
+        }, {
+            name: 'laoma12',
+            mail: 'flydragonml@gmail.com',
+            age: 20
+        }, {
+            name: 'laoma13',
+            mail: 'flydragonml@gmail.com',
+            age: 12
+        }, {
+            name: 'laoma14',
+            mail: 'flydragonml@gmail.com',
+            age: 99
+        }, {
+            name: 'laoma15',
+            mail: 'flydragonml@gmail.com',
+            age: 19
+        }];
+        $(function(){
+            $('.list')[0].border = 1; //设置边框
+            var strArry = [];
+            for (let i = 0; i < data.length; i++) {
+                const userInfo = data[i];
+                var tempStr = '';
+                tempStr+='<tr>';
+                tempStr+='<td>'+userInfo.name+'</td>';
+                tempStr+='<td>'+userInfo.mail+'</td>';
+                tempStr+='<td>'+userInfo.age+'</td>';
+                tempStr+='</tr>';
+                strArry.push(tempStr);
+            }
+            $('.list tbody').html(strArry);
+            //读取tbody的html字符串
+            $('.list tbody').html();
+            //也可以调用这个方法参数为index为这个对象在这个集合中的索引值和这个对象原先的value，以便进行其他操作
+            $('.list tbody').html(function (index,oldHtml) {
+                console.log(index+'   '+oldHtml);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../lib/jquery-1.11.3.min.js"></script>
+    <style>
+        p{
+            background-color: red;
+            padding: 20px;
+        }
+       
+    </style>
+</head>
+<body>
+    <div>
+        <p style="background-color:red;" id="p1">鞋底的</p>
+        <input type="checkbox" name="" id="ckb1" >复选框
+        <input type="checkbox" name="" id="ckb2" value="1123">复选框2
+    </div>
+    <!-- 控制样式 -->
+    <script>
+        $(function () {
+                //设置
+                // document.getElementById('p1').style.backgroundColor = 'yellow';
+                // $('#p1').css('backgroundColor','blue');
+                //获取，只能获取到行内样式
+                console.log(document.getElementById('p1').style.backgroundColor);
+
+                //设置:
+                // document.getElementById('p1').style.height = '100px';
+                $('#p1').height('200px');
+                //获取
+                console.log(document.getElementById('p1').offsetHeight);//不带单位的，且包含padding和border
+                console.log(getComputedStyle(document.getElementById('p1'),null).height );//带单位的
+                console.log($('#p1').height());//不带单位的
+                console.log($('#p1').css('height')); //带px单位的
+        });
+    </script>
+    <!-- 控制属性 -->
+    <script>
+        $(function(){
+            //js
+            document.getElementById('ckb1').checked ='checked'; //或者 = true; 也一样
+            console.log(document.getElementById('ckb1').checked) ; //返回值为 true
+            // document.getElementById('ckb1').setAttribute('checked','checked');
+            // console.log(document.getElementById('ckb1').getAttribute('checked')); //返回值为 'checked'
+            //jQuery:
+            //1.attr:  attr适用于所有属性，包括自定义属性，返回值都为string
+            $('#ckb2').attr('checked','checked');
+            $('#ckb2').removeAttr('checked','checked'); //移除
+            // console.log($('#ckb2').attr('checked')); //返回值为 'checked'
+            //2.prop  适用于disabled、checked、selected、multiple、readOnly、autofocus等 返回值为true或者false
+            $('#ckb2').prop('checked',true);//或者 $('#ckb2').prop('checked','checked'); 
+            
+            console.log($('#ckb2').prop('checked'));   //返回值为 true
+            // $('#ckb2').checked = true;  //不能这样直接访问dom内置属性
+            //可以使用jQuery提供的一些方法来访问DOM元素内置属性
+            console.log($('#ckb2').val()); //返回ckb2的value属性的值 1123
+            
+        });
+    </script>
+</body>
+</html>
