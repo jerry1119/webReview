@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../lib/jquery-1.11.3.min.js"></script>
+    <style>
+        html,body,ul,div{
+            padding: 0;
+            margin: 0;
+        }
+        ul{
+            list-style: none;
+        }
+        .ac .ac-hd .hd-item{
+            float: left;
+            width: 209px;
+            height: 30px;
+            line-height: 30px;
+            background-color: aqua;
+            border: 1px solid burlywood;
+            text-align: center;
+            cursor: pointer;
+        }
+        .ac .ac-hd .hd-item:hover{
+            background-color: blueviolet;
+        }
+        .ac .ac-hd{
+            /* 让盒子把里面的内容包裹住，因为他float了 */
+            overflow: hidden;
+        }
+        .ac .ac-bd .bd-item{
+            display: none;
+        }
+        .ac .ac-bd .on{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="ac">
+        <ul class="ac-hd">
+            <li class="hd-item">商品1</li>
+            <li class="hd-item">商品2</li>
+            <li class="hd-item">商品3</li>
+        </ul>
+        <ul class="ac-bd">
+            <li class="bd-item on"><img src="../20190407js/images/1.jpg" alt=""></li>
+            <li class="bd-item"><img src="../20190407js/images/2.jpg" alt=""></li>
+            <li class="bd-item"><img src="../20190407js/images/3.jpg" alt=""></li>
+        </ul>
+    </div>
+    <script>
+        $(function(){
+            $('.hd-item').on('mouseenter',function(){
+                var index = $('.hd-item').index(this);
+                var bdItem = $('.bd-item').get(index); //这里得到的是dom对象不是包装对象
+                $(bdItem).show(1000).siblings().hide(1000);
+
+            });
+        });
+    </script>
+</body>
+</html>

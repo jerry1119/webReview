@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,8 +7,96 @@
     <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <title>Document</title>
+    <script src="../lib/jquery-1.11.3.min.js"></script>
+    <style>
+        html,body,div{
+            padding: 0px;
+            margin: 0px;
+        }
+        .div1{
+            border: 1px solid #333333;
+            width: 400px;
+            /* 我没给div设高度 */
+            /* height: 100px; */
+            line-height: 30px; /*这是内部的行高*/
+            padding: 10px;
+            margin: 100px auto;
+            cursor:text;
+            overflow:hidden;
+        }
+        .div1 #txt1{
+            border: none;
+            outline: none;
+            height:30px;
+            line-height: 30px;
+            /* width: 70px; */
+            float: left;    /*加了这句，因为div里面的元素都浮动了,加上我没给div给height，
+            外面的div直接塌陷了,。解决办法是设置div的 overflow:hidden
+            这样的话，就是div内容有多高外面的div就会撑大，假如给外面div设了固定height的话
+            里面内容超出部分就hidden了*/
+        }
+        .div1 .lb-span{
+            float: left;
+            border: 1px solid black;
+            margin-right: 10px;
+            margin-top: 5px;
+            cursor: pointer;
+            padding: 0 10px;  /*相当于把标签内的文字放到中间*/
+        }
+    </style>
 </head>
 <body>
-    <span class="glyphicon glyphicon-remove">试一下bootStrap的css组件</span>
+    <!-- <span class="glyphicon glyphicon-remove">试一下bootStrap的css组件</span> -->
+    <div class="div1">
+        <!-- <span class="lb-span">我输入的信息<sup><p class="glyphicon glyphicon-remove"></p></sup></span> -->
+        <input type="text" name="" id="txt1">
+    </div>
+    <script>
+        $(function(){
+            $('#txt1').on('keydown',function(e){
+                if(e.which==13){  //13 ---回车键
+                   inputToLabel();
+                }else if(e.which==8){  //8 后退键
+                    //按了后退键，把上一个span删除，并把他的内容放到txt中
+                    if($(this).val().length<=0){
+                        console.log('dewfdew');
+                        $(this).val($('.div1 span:last').text()) ;
+                        $('.div1 span:last').remove();
+                         // 取消默认行为，取消后退键删除字符的默认行为,注意不要写到if外面了，不然后面不能正常用了
+                        e.preventDefault();
+                         //取消事件冒泡，在这里貌似没用
+                        e.cancelBubble();
+                    }
+                }
+            });
+            //将txt生成标签
+            function inputToLabel() {
+                // console.log(e.which);
+                var strspan = '<span class="lb-span">' + $('#txt1').val() + '<sup><p class="glyphicon glyphicon-remove"></p></sup></span>';
+                if ($('#txt1').val().length > 0) {
+                    // $('#txt1').parent().append(strspan); //这种方式插入的位置不对。。
+                    // $(strspan).insertBefore($('#txt1')); //这样也行
+                    $('#txt1').before(strspan);  //最简单的方法
+                    $('#txt1').val('');
+                }
+            }
+            //文本框失去焦点时，假如txt中有内容，将它生成标签
+            $('#txt1').on('blur',function(){
+                inputToLabel();
+            });
+            //关闭按钮
+            //原先的错误：不应该在 .lb-span下去找，因为这样新生产的就找不到了
+            // $('.lb-span').on('click','sup',function(){
+            //     $(this).parent().remove();
+            // });
+            $('.div1').on('click','sup',function(){
+                $(this).parent().remove();
+            });
+            //点div让text获得焦点
+            $('.div1').on('click',function(){
+                $('#txt1').focus();
+            });
+        });
+    </script>
 </body>
 </html>
